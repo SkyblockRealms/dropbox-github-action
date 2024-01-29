@@ -16,6 +16,10 @@ inputs:
   target-path:
     description: 'Path to the target file in Dropbox'
     required: true
+  enable-file-overwrite:
+    description: 'Overwrite the Dropbox file or add to it'
+    required: false
+    default: 'add'
 runs:
   using: "composite"
   steps:
@@ -32,7 +36,7 @@ runs:
       run: |
         curl -X POST https://content.dropboxapi.com/2/files/upload \
           --header "Authorization: Bearer $DROPBOX_ACCESS_TOKEN" \
-          --header "Dropbox-API-Arg: {\"path\":\"${{ inputs.target-path }}\"}" \
+          --header "Dropbox-API-Arg: {\"path\":\"${{ inputs.target-path }}\", \"mode\": \"${{ inputs.target-path }}\" }" \
           --header  "Content-Type: application/octet-stream" \
           --data-binary @${{ inputs.source-path }}
         
