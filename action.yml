@@ -16,7 +16,7 @@ inputs:
   target-path:
     description: 'Path to the target file in Dropbox'
     required: true
-  enable-file-overwrite:
+  file-mode:
     description: 'Overwrite the Dropbox file or add to it'
     required: false
     default: 'add'
